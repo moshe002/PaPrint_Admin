@@ -1,9 +1,15 @@
+import Sidebar from "./Components/Sidebar"
+
+import Router from "./Components/Router/Router"
 
 function App() {
 
   return (
-    <div>
-      <h1>this is admin</h1>
+    <div className="flex flex-col sm:flex-row h-screen w-full">
+      <Sidebar />
+      <div className="p-5">
+        <Router />
+      </div>
     </div>
   )
 }
