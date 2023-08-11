@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom'
+import { BiHome, BiUser, BiAt  } from 'react-icons/bi'
+
+import Buttons from './Buttons'
 
 function Sidebar() {
   return (
-    <div className="bg-gray-500 h-1/6 w-full fixed bottom-0 sm:bottom-full sm:static sm:h-full sm:w-2/12">
-        <div className="flex flex-col justify-center items-center p-5 text-white">
-            <h1 className="text-3xl font-semibold font-mono">Admin</h1>
-        </div>
-        <div>
-            <Link to="/">Dashboard</Link>
-            
-        </div>
+    <div className="flex flex-row md:flex-col bg-gray-500 h-1/6 md:h-auto w-full md:w-2/12 fixed md:static bottom-0 md:bottom-full">
+      <div className='flex flex-row md:flex-col w-full h-full justify-evenly items-center'>
+        <Link to="/">
+          <Buttons text={"Home"} icon={<BiHome />} />
+        </Link>
+        <Link to="/users">
+          <Buttons text={"Users"} icon={<BiUser />} />
+        </Link>
+        <Link to="/about">
+          <Buttons text={"About"} icon={<BiAt />} />
+        </Link>
+      </div>
     </div>
   )
 }
