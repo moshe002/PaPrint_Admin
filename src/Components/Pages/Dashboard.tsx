@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import supabase from '../../supabaseConfig'
 
+import Loading from '../Loading';
+
 interface DataTypes {
   id: number;
   filename:string;
@@ -14,19 +16,25 @@ interface DataTypes {
 function Dashboard() {
 
   const [customerInfo, setCustomerInfo] = useState<DataTypes[]>([])
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     getCustomerData();
   }, [])
 
   const getCustomerData = async () => {
+    setLoading(true);
     try {
       const { data, error } = await supabase.from("toPrint").select()
       if(error) {
         throw new Error(error.message)
       }
       if(data) {
-        setCustomerInfo(data)
+        setTimeout(() => {
+          setCustomerInfo(data)
+          setLoading(false)
+        }, 500)
+        
       } 
     } catch (error) {
       console.error("Error fetching customer data:", error);
@@ -36,6 +44,11 @@ function Dashboard() {
   return (
     <div className='flex flex-col justify-evenly items-center p-3 mb-16 md:mb-0'>
       <h1 className='text-center text-4xl mb-5 font-semibold font-mono'>Customer Queries</h1>
+      {
+        loading
+        &&
+        <Loading />
+      }
       {
         customerInfo.map((customer) => {
           return (
