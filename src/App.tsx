@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col sm:flex-row h-full w-full">
         <Sidebar />
-        <div className="p-3 w-full">
+        <div className="w-full">
           <Router />
         </div>
       </div>
