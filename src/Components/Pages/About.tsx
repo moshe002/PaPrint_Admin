@@ -13,7 +13,13 @@ function About() {
         </div>
         <div>
           <h1 className="font-mono font-bold text-center">
-            Made by: <a rel="noopener" href="https://www.facebook.com/mosesanthony873/" target="_blank" className="font-normal hover:text-green-500 duration-150">Moses Anthony Y. Fat</a>
+            Made by: <a 
+              rel="noopener" 
+              href="https://www.facebook.com/mosesanthony873/" 
+              target="_blank" 
+              className="font-normal hover:text-green-500 duration-150"
+              title="a coding partner would be nice">
+                Moses Anthony Y. Fat</a>
           </h1>
         </div>
     </div>
