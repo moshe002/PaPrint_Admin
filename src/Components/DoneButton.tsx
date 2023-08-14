@@ -1,8 +1,14 @@
-const handleClick = () => {
-    console.log('Document printed! Awaiting for payment and retrieval of document in our shop. Thank you!')
-};
+interface DoneButtonProps {
+  setDonePrinting: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-function DoneButton() {
+const DoneButton:React.FC<DoneButtonProps> = ({ setDonePrinting }) => {
+
+  const handleClick = () => {
+    setDonePrinting(true);
+    console.log('Document printed! Awaiting for payment and retrieval of document in our shop. Thank you!')
+  };
+
   return (
     <>
         <button

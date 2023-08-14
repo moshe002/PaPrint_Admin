@@ -20,6 +20,7 @@ function Dashboard() {
 
   const [customerInfo, setCustomerInfo] = useState<DataTypes[]>([])
   const [loading, setLoading] = useState<boolean>(false);
+  const [donePrinting, setDonePrinting] = useState<boolean[]>(customerInfo.map(() => false));
 
   useEffect(() => {
     getCustomerData()
@@ -76,7 +77,7 @@ function Dashboard() {
       { loading && <Loading /> }
       <div className='flex flex-wrap gap-3 justify-evenly'>
         {
-          customerInfo.map((customer) => {
+          customerInfo.map((customer, index) => {
             return (
               <div className='flex flex-col mb-5 gap-3 text-center p-3 border-2 border-gray-500 rounded-md' key={customer.id}>
                 <div className='flex justify-between'>
@@ -111,7 +112,7 @@ function Dashboard() {
                         <div className='flex flex-col' key={index} >
                           <a 
                             className='p-1 font-semibold text-white bg-orange-300 hover:bg-orange-400 duration-150 rounded-md'
-                            title='file' 
+                            title='download file' 
                             href={`https://mzglgldsmcjedhciycas.supabase.co/storage/v1/object/public/to_print/${customer.name}/${file.name}`} 
                             target='_blank' 
                             rel='noopener noreferrer'
@@ -123,9 +124,22 @@ function Dashboard() {
                     })
                   }
                 </div>
-                <div className='flex flex-row justify-center items-center gap-3'>
-                  <DeleteButton />
-                  <DoneButton />
+                <div className='flex flex-col justify-center items-center gap-3'>
+                {
+                  donePrinting[index] ? (
+                    <DeleteButton name={customer.name} file={customer.files} />
+                  ) : (
+                    <DoneButton
+                      setDonePrinting={() =>
+                          setDonePrinting((prevStates) => {
+                            const newState = [...prevStates];
+                            newState[index] = !newState[index];
+                            return newState;
+                          })
+                        }
+                    />
+                  )
+                }
                 </div>
               </div>
             )
