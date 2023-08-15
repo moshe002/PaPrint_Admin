@@ -7,17 +7,12 @@ interface DeleteProps {
 
 const DeleteButton:React.FC<DeleteProps> = ({ name, file }) => {
 
-  // const deleteFile = async () => { 
-    
-  // }
-
   const handleDelete = async () => {
     try {
       const { error } = await supabase.from('toPrint').delete().eq('name', name)
 
       let fileName = file.map((file) => file.name)
-      console.log(fileName)
-      const { data } = await supabase.storage.from('to_print').remove([`${name}+/+${fileName.toString()}`]) // folder/avatar1.png
+      const { data } = await supabase.storage.from('to_print').remove([`${name}/${fileName.toString()}`]) // folder/avatar1.png
       
       if(data){
         console.log("delete successful")
@@ -32,10 +27,8 @@ const DeleteButton:React.FC<DeleteProps> = ({ name, file }) => {
   };
 
   const handleClick = () => {
-    //handleDelete()
+    handleDelete()
     //window.location.reload()
-    let fileName = file.map((file) => file.name)
-    console.log(fileName.toString())
   }
 
   return (

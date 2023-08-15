@@ -34,12 +34,6 @@ function Dashboard() {
         throw new Error(customerError.message)
       }
       if(customerData) { // is an array of objects
-        //let mappedData = data.map((data) => data.name) // this returns an array of the names from data
-        //getFile(data)
-        // setTimeout(() => {
-        //   setCustomerInfo(data)
-        //   setLoading(false)
-        // }, 500)  
         const combinedData: DataTypes[] = [];
 
         for (const customer of customerData) {
@@ -130,6 +124,7 @@ function Dashboard() {
                     <DeleteButton name={customer.name} file={customer.files} />
                   ) : (
                     <DoneButton
+                      customerEmail={customer.email}
                       setDonePrinting={() =>
                           setDonePrinting((prevStates) => {
                             const newState = [...prevStates];
